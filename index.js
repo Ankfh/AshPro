@@ -8,7 +8,6 @@ const fileupload = require("express-fileupload");
 //routers
 const userRouter = require("./routes/user");
 
-
 const connectDB = require("./db");
 connectDB();
 
@@ -25,6 +24,9 @@ app.use(
 );
 
 app.use("/public", express.static(path.join(__dirname, "/public")));
+
+app.use("/user", userRouter);
+
 app.use(express.static(path.join(__dirname, "./client/build")));
 app.get("*", function (_, res) {
   res.sendFile(
@@ -34,11 +36,6 @@ app.get("*", function (_, res) {
     }
   );
 });
-
-app.use("/api/user", userRouter);
-
-
-
 const port = process.env.PORT || 6010;
 app.listen(port, () => {
   console.log(`server is running 0n localhost:${port}`);
