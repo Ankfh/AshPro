@@ -10,11 +10,10 @@ import Container from "@mui/material/Container";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { EnterButton } from "../muiStyle/NavbarStyle";
+import { EnterButton, MuiTextfield } from "../muiStyle/NavbarStyle";
 import { useState } from "react";
 import { useCreateUserMutation } from "../features/apiSlice";
 import { useNavigate } from "react-router";
-
 const schema = yup.object().shape({
   email: yup.string().required("Email is required"),
   password: yup.string().required("password is required"),
@@ -47,21 +46,21 @@ const SignIn = () => {
   };
 
   return (
-    <Container maxWidth="xs">
+    <div className="bg-slate-800 h-screen">
       <form onSubmit={handleSubmit(formSubmit)}>
         <Box
           sx={{
-            marginTop: 8,
+            paddingTop: 7,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <Typography component="h1" variant="h5">
-            Sign in
+          <Typography component="h1" className="text-white w-full text-center" variant="h5">
+            <p className="pb-2">Login</p> <p>Gmail Account</p>
           </Typography>
           <Box sx={{ mt: 1 }}>
-            <TextField
+            <MuiTextfield
               margin="normal"
               //   required
               fullWidth
@@ -72,11 +71,11 @@ const SignIn = () => {
               {...register("email")}
             />
             {errors.email ? (
-              <p className="text-red-700">{errors.email?.message}</p>
+              <p className="text-red-700 w-full">{errors.email?.message}</p>
             ) : (
               ""
             )}
-            <TextField
+            <MuiTextfield
               margin="normal"
               //   required
               fullWidth
@@ -88,7 +87,7 @@ const SignIn = () => {
               {...register("password")}
             />
             {errors.password ? (
-              <p className="text-red-700">{errors.password?.message}</p>
+              <p className="text-red-700 w-full">{errors.password?.message}</p>
             ) : (
               ""
             )}
@@ -107,7 +106,7 @@ const SignIn = () => {
           </Box>
         </Box>
       </form>
-    </Container>
+    </div>
   );
 };
 
